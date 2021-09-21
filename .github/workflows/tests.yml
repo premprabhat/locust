@@ -68,7 +68,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            abhishek138/locust:latest
+            abhishek138/Locust:master
 
   docker_tagged:
     name: Tagged - Docker push to tag based on git tag. Also push 'latest' if on master
