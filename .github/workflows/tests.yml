@@ -50,32 +50,18 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Prepare
-        id: prepare
-        run: |
-            TAG=${GITHUB_REF##*/}
-            echo ::set-output name=tag_name::${TAG}    
       - uses: docker/login-action@v1
-        if: github.repository_owner == 'premprabhat'
+        if: github.repository_owner == 'locustio'
         with:
-          username: abhishek138
+          username: locustbuild
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v1
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      #- name: Login do docker.io
-        #run: docker login -u navicore -p ${{ secrets.DOCKER_TOKEN }}
-      - name: build and publish image
-        id: docker_build    
       - uses: docker/build-push-action@v2
         with:
+          build-args: |
+            BUILDKIT_CONTEXT_KEEP_GIT_DIR=1
           context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: |
-            abhishek138/locust:master
+          push: ${{ github.ref == 'refs/heads/master' && github.repository_owner == 'locustio' }}
+          tags: locustio/locust:master
 
   docker_tagged:
     name: Tagged - Docker push to tag based on git tag. Also push 'latest' if on master
