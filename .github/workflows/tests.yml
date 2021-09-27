@@ -62,7 +62,7 @@ jobs:
       - name: build and publish image
         id: docker_build    
         uses: docker/build-push-action@v2
-        if: ${{ github.ref == 'refs/heads/master' && github.repository_owner == 'locustio' }}
+        if: ${{ github.ref == 'refs/heads/master' && github.repository_owner == 'premprabhat' }}
         with:
           context: .
           file: ./Dockerfile
@@ -75,7 +75,7 @@ jobs:
     name: Tagged - Docker push to tag based on git tag. Also push 'latest' if on master
     needs: tests
     runs-on: ubuntu-latest
-    if: startsWith(github.event.ref, 'refs/tags') && github.repository_owner == 'locustio'
+    if: startsWith(github.event.ref, 'refs/tags') && github.repository_owner == 'premprabhat'
     steps:
       - uses: actions/checkout@v2
         with:
@@ -103,7 +103,7 @@ jobs:
   publish:
     name: PyPI - Publish if this is a tagged commit
     needs: [verify_docker_build, tests]
-    if: startsWith(github.event.ref, 'refs/tags') && github.repository_owner == 'premprabhat'
+    if: startsWith(github.event.ref, 'refs/tags') && github.repository_owner == 'locustio'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
