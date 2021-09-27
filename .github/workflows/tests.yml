@@ -98,7 +98,7 @@ jobs:
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: abhishek138/locust:${{ env.TAG }}${{ ( env.BRANCH == 'master' && ',locustio/locust:latest') || '' }}
+          tags: abhishek138/locust:${{ env.TAG }}${{ ( env.BRANCH == 'master' && ',abhishek138/locust:latest') || '' }}
 
   publish:
     name: PyPI - Publish if this is a tagged commit
