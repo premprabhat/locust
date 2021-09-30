@@ -187,7 +187,6 @@ jobs:
             ${{ env.img }}  \
             bash -exc '${{ env.py }} -m venv .env && \
             source .env/bin/activate && \
-            export PY=$(python -VV | sha256sum | cut -d' ' -f1) && \
             pip install tox codecov && \
             tox && \
             deactivate'
