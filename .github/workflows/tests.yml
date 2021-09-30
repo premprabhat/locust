@@ -175,9 +175,6 @@ jobs:
       img: quay.io/pypa/manylinux2014_${{ matrix.arch }}
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-       python-version: ${{ matrix.python }}
     - name: Update pip   
       run: |
         pip install -U wheel
