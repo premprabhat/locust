@@ -186,11 +186,11 @@ jobs:
     - name: Install tools
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-          ${{ env.img }} ${{ env.py }} -m pip install -U  pip build          
+          ${{ env.img }} ${{ env.py }}         
     
     - name: set full Python version in PY env var
       run:  |
             docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-            ${{ env.img }} \
+            ${{ env.img }} && \
             echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV && \
             deactivate'
