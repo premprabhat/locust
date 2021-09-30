@@ -192,5 +192,3 @@ jobs:
       run: |
             docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
             ${{ env.img }}  \
-            bash -exc '\
-            echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV  \
