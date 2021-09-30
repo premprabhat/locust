@@ -185,12 +185,13 @@ jobs:
       uses: docker/setup-qemu-action@v1
     - name: Install tools
       run: |
-        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-          ${{ env.img }} ${{ env.py }}         
+           docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+           ${{ env.img }} ${{ env.py }}         
     
     - name: set full Python version in PY env var
-      run:  |
+      run: |
             docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-            ${{ env.img }} && \
+            ${{ env.img }}  \
+            bash -exc '\
             echo "PY=$(python -VV | sha256sum | cut -d' ' -f1)" >> $GITHUB_ENV && \
             deactivate'
